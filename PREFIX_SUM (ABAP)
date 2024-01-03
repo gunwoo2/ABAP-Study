@@ -1,0 +1,55 @@
+*&---------------------------------------------------------------------*
+*& Report ZHWE03_1A
+*&---------------------------------------------------------------------*
+*& 누적 합 계산하기
+*&---------------------------------------------------------------------*
+REPORT ZHWE03_1A.
+
+PARAMETERS PA_NUM TYPE I.
+DATA GV_A TYPE I.
+DATA GV_B LIKE PA_NUM.
+
+MOVE PA_NUM TO GV_B.
+
+PERFORM PREFIX_SUM USING GV_A GV_B.
+
+*  WRITE : / '누적합 계산 결과 = ', GV_A.
+
+*CASE PA_NUM.
+*  WHEN '누적합 계산 결과'.
+*    GV_B >= 1 AND GV_B <= 100.
+*  WHEN '누적합 계산 결과'.
+*    GV_B >= 1 AND GV_B <= 100.
+*  WHEN OTHERS.
+*    WRITE : / '누적합 계산 결과 = ', GV_A.
+*ENDCASE.
+
+
+
+FORM PREFIX_SUM CHANGING VALUE(PV_A) TYPE I
+                         VALUE(PV_B) TYPE I.
+
+*  DATA PV_C TYPE I.
+
+  IF PV_B < 1.
+
+"   MESSAGE I001( 권한 문제)
+   WRITE / '입력 숫자가 1보다 작습니다'.
+
+  ELSEIF
+
+    PV_B > 100.
+
+    WRITE / '입력 숫자가 100보다 큽니다'.
+
+  ELSE.
+
+    DO  PV_B TIMES.
+
+        PV_A = PV_A + ( SY-INDEX ).
+
+    ENDDO.
+    WRITE : / '누적합 계산 결과 = ', PV_A.
+  ENDIF.
+
+ENDFORM.
