@@ -18,9 +18,9 @@ MOVE PA_NUM2 TO GV_C.
 PERFORM PARTIAL_SUM CHANGING GV_A GV_B GV_C.
 
 
-FORM PARTIAL_SUM CHANGING VALUE(PV_A) TYPE I
-                          VALUE(PV_B) TYPE I
-                          VALUE(PV_C) TYPE I.
+FORM PARTIAL_SUM CHANGING PV_A TYPE I
+                          PV_B TYPE I
+                          PV_C TYPE I.
 
 *  DATA PV_C TYPE I.
 
