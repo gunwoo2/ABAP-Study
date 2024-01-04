@@ -24,8 +24,8 @@ PERFORM PREFIX_SUM CHANGING GV_A GV_B.
 * PREFIX_SUM 이라는 Subroutines
 * 정수형의 PV_A, PV_B 라는 지역변수를 선언
 * call by value and result 방식을 사용
-FORM PREFIX_SUM CHANGING VALUE(PV_A) TYPE I
-                         VALUE(PV_B) TYPE I.
+FORM PREFIX_SUM CHANGING PV_A TYPE I
+                         PV_B TYPE I.
 
 * 입력 받은 정수가 1보다 작을 때 오류 메시지를 출력.
   IF PV_B < 1.
