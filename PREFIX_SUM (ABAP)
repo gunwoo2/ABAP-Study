@@ -5,48 +5,51 @@
 *&---------------------------------------------------------------------*
 REPORT ZHWE03_1A.
 
+* 정수를 입력 받기 위한 Parameters 선언
 PARAMETERS PA_NUM TYPE I.
-DATA GV_A TYPE I.
-DATA GV_B LIKE PA_NUM.
 
-MOVE PA_NUM TO GV_B.
+* 전역 변수 생성
+DATA GV_A TYPE I. "GV_A 라는 변수를 정수형 타입으로 선언
+DATA GV_B LIKE PA_NUM. "GV_B 라는 변수를 PA_NUM과 동일한 타입으로 선언.
+                       "이때 PA_NUM이 정수형이므로 GV_B도 정수형 타입
 
-PERFORM PREFIX_SUM USING GV_A GV_B.
+* PA_NUM 값을 GV_B에 저장
+MOVE PA_NUM TO GV_B. "예를 들어 입력 필드에서 5를 입력 시, GV_B에 5가 들어감
 
-*  WRITE : / '누적합 계산 결과 = ', GV_A.
-
-*CASE PA_NUM.
-*  WHEN '누적합 계산 결과'.
-*    GV_B >= 1 AND GV_B <= 100.
-*  WHEN '누적합 계산 결과'.
-*    GV_B >= 1 AND GV_B <= 100.
-*  WHEN OTHERS.
-*    WRITE : / '누적합 계산 결과 = ', GV_A.
-*ENDCASE.
+* PREFIX_SUM 이라는 Subroutines 호출
+* 이때 call by value and result 방식을 사용
+PERFORM PREFIX_SUM CHANGING GV_A GV_B.
 
 
-
+* PREFIX_SUM 이라는 Subroutines
+* 정수형의 PV_A, PV_B 라는 지역변수를 선언
+* call by value and result 방식을 사용
 FORM PREFIX_SUM CHANGING VALUE(PV_A) TYPE I
                          VALUE(PV_B) TYPE I.
 
-*  DATA PV_C TYPE I.
-
+* 입력 받은 정수가 1보다 작을 때 오류 메시지를 출력.
   IF PV_B < 1.
 
 "   MESSAGE I001( 권한 문제)
    WRITE / '입력 숫자가 1보다 작습니다'.
 
+* 입력 받은 정수가 100보다 클 때 오류 메시지를 출력.
   ELSEIF
 
     PV_B > 100.
 
     WRITE / '입력 숫자가 100보다 큽니다'.
 
+* 입력 받은 정수가 오류 아닌 경우 1부터 누적합산하여 WRITE문으로 출력.
+* WRITE문으로 출력은 DO 반복문이 완료되었을 때 출력되도록, 반복문 밖에서 선언
   ELSE.
 
-    DO  PV_B TIMES.
+    DO  PV_B TIMES. " 무한루프에 빠지는 걸 방지하기 위해 DO N TIME 사용
+                    " PV_B는 전역변수 GV_B를 참조
+                    " PV_B는 PA_NUM의 값을 받기에 즉, PA_NUM의 값이 PV_B 적용됨
 
-        PV_A = PV_A + ( SY-INDEX ).
+
+        PV_A = PV_A +  SY-INDEX.
 
     ENDDO.
     WRITE : / '누적합 계산 결과 = ', PV_A.
