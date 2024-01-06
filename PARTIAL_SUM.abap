@@ -22,11 +22,11 @@ FORM PARTIAL_SUM CHANGING PV_A TYPE I
                           PV_B TYPE I
                           PV_C TYPE I.
 
-*  DATA PV_C TYPE I.
+
 
   IF PV_B < 1 OR PV_C < 1.
 
-"   MESSAGE I001( 권한 문제)
+
    WRITE / '입력 숫자가 1보다 작습니다'.
 
   ELSEIF
