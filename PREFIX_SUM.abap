@@ -15,12 +15,16 @@ DATA GV_B LIKE PA_NUM. "GV_B 라는 변수를 PA_NUM과 동일한 타입으로 �
 
 " PA_NUM 값을 GV_B에 저장
 "예를 들어 입력 필드에서 5를 입력 시, GV_B에 5가 들어감
-MOVE PA_NUM TO GV_B. 
+MOVE PA_NUM TO GV_B.
 
 * PREFIX_SUM 이라는 Subroutines 호출
 * 이때 call by Ref. 방식을 사용
 PERFORM PREFIX_SUM CHANGING GV_A GV_B.
 
+
+*--------------------------------------------------------------------*
+*                 'PREFIX_SUM' Subroutines 함수                     *
+*--------------------------------------------------------------------*
 
 * PREFIX_SUM 이라는 Subroutines 함수
 * 정수형의 PV_A, PV_B 라는 지역변수를 선언
@@ -31,7 +35,7 @@ FORM PREFIX_SUM CHANGING PV_A TYPE I
 * 입력 받은 정수가 1보다 작을 때 오류 메시지를 출력.
   IF PV_B < 1.
 
-    MESSAGE I005(ZTEST03_MSG). "' 입력 숫자가 1보다 작습니다'. 오류 창 출력
+    MESSAGE I005(ZTEST03_MSG). "'입력 숫자가 1보다 작습니다'. 오류 창 출력
 
 
 * 입력 받은 정수가 100보다 클 때 오류 메시지를 출력.
@@ -41,7 +45,7 @@ FORM PREFIX_SUM CHANGING PV_A TYPE I
 
     MESSAGE I006(ZTEST03_MSG). " '입력 숫자가 100보다 큽니다'. 오류 창 출력
 
-* 정상인  경우 1부터 누적합산하여 WRITE문으로 출력.
+* 정상의 값이 입력된 경경우 1부터 누적합산하여 WRITE문으로 출력.
 
   ELSE.
 
