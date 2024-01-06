@@ -9,12 +9,13 @@ REPORT ZHWE03_1A.
 PARAMETERS PA_NUM TYPE I.
 
 * 전역 변수 생성
-DATA GV_A TYPE I. "GV_A 라는 변수를 정수형 타입으로 선언
+DATA GV_A TYPE I.      "GV_A 라는 변수를 정수형 타입으로 선언
 DATA GV_B LIKE PA_NUM. "GV_B 라는 변수를 PA_NUM과 동일한 타입으로 선언.
-"이때 PA_NUM이 정수형이므로 GV_B도 정수형 타입
+                       "이때 PA_NUM이 정수형이므로 GV_B도 정수형 타입
 
-* PA_NUM 값을 GV_B에 저장
-MOVE PA_NUM TO GV_B. "예를 들어 입력 필드에서 5를 입력 시, GV_B에 5가 들어감
+" PA_NUM 값을 GV_B에 저장
+"예를 들어 입력 필드에서 5를 입력 시, GV_B에 5가 들어감
+MOVE PA_NUM TO GV_B. 
 
 * PREFIX_SUM 이라는 Subroutines 호출
 * 이때 call by Ref. 방식을 사용
