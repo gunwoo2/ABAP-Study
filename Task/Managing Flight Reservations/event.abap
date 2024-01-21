@@ -23,7 +23,7 @@ AT SELECTION-SCREEN ON BLOCK BL2.
   IF ( SO_CAR IS INITIAL AND SO_CON IS INITIAL
     AND SO_FLD IS INITIAL AND SO_CITO IS INITIAL ) AND PA_RAD2 EQ 'X'.
 
-    MESSAGE I010(ZTEST03_MSG). " 하나 이상의 Select options을 선택 시,
+    MESSAGE I010. " 하나 이상의 Select options을 선택 시,
                                " 더 효과적인 조회가 가능합니다.
   ENDIF.
 
