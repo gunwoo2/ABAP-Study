@@ -1,0 +1,6 @@
+성과 : 
+Module Pool Program으로 Screen에 대한 이해도 향상과 함께 DB Access를 활용할 수 있다.
+다중 화면을 생성하여 이를 Tabstrips로 표현해 보다 향상된 GUI 환경을 제공할 수 있다.
+
+목표 : 
+1. 검색 조건에 따라 3개의 탭에서 결과를 조회하라 (Booking Info, Flight Info, Customer Info)
