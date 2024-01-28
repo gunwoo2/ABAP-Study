@@ -4,3 +4,31 @@ Module Pool Program으로 Screen에 대한 이해도 향상과 함께 DB Access�
 
 목표 : 
 1. 검색 조건에 따라 3개의 탭에서 결과를 조회하라 (Booking Info, Flight Info, Customer Info)
+
+
+-----------------------------------------------------------------------------------------------------
+SCREEN 100 번은 다음과 같은 Flow Logic으로 구현함.
+
+PROCESS BEFORE OUTPUT.
+  MODULE STATUS_0100.   " GUI 관련 설정
+  MODULE CLEAR_OK_CODE. " OK_CODE 초기화
+  MODULE FILL_DYNNR.    " TAB 전환
+  MODULE ICON_CREATE.   " 아이콘 설정
+  MODULE CHECK_BOOKING_INFO. " 0110 탭 조회
+  MODULE CHECK_FLIGHT_INFO.  " 0120 탭 조회
+  MODULE CHECK_SCUSTOM.      " 0130 탭 조회
+  CALL SUBSCREEN SUB INCLUDING SY-CPROG DYNNR. " 서브스크린 호출
+
+*--------------------------------------------------------------------*
+PROCESS AFTER INPUT.
+  MODULE EXIT_COMMAND_0100 AT EXIT-COMMAND. " EXIT, CANC 관련 모듈
+  MODULE USER_COMMAND_0100. " BACK, TAB 전환
+  CHAIN.
+    FIELD: SDYN_BOOK-CARRID,
+           SDYN_BOOK-CONNID,
+           SDYN_BOOK-CONNID,
+           SDYN_BOOK-FLDATE.
+    MODULE CHECK_INPUT_VALUES ON CHAIN-REQUEST. " 입력값 검증
+  ENDCHAIN.
+  CALL SUBSCREEN SUB. " 서브크크린 호출
+-----------------------------------------------------------------------------------------------------
