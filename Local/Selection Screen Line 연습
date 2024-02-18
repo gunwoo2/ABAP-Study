@@ -1,0 +1,26 @@
+*&---------------------------------------------------------------------*
+*& Report YE00_EX021
+*&---------------------------------------------------------------------*
+*& Selection Screen Line 연습
+*&---------------------------------------------------------------------*
+REPORT YE03_EX021.
+
+INCLUDE YE03_EX021_TOP.
+*INCLUDE YE00_EX021_TOP. " 전역 변수 선언
+INCLUDE YE03_EX021_SCR.
+*INCLUDE YE00_EX021_SCR. " Selection Screen 구성
+INCLUDE YE03_EX021_F01.
+*INCLUDE YE00_EX021_F01. " Form ( Subroutines ) 선언
+
+*--------------------------------------------------------------------*
+INITIALIZATION.       " Selection Screen의 초기값 설정
+
+AT SELECTION-SCREEN.  " Selection Screen의 입력값 점검
+*AT SELECTION-SCREEN ON BLOCK ~~.
+*AT SELECTION-SCREEN ON RADIOBUTTON GROUP ~~.
+*AT SELECTION-SCREEN ON 파라메터의 선언된 이름.
+*AT SELECTION-SCREEN ON 셀렉트옵션의 선언된 이름.
+
+START-OF-SELECTION.   " Selection Screen에서 실행버튼 누른 이후
+
+*--------------------------------------------------------------------*
